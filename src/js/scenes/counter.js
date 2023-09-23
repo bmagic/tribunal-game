@@ -3,6 +3,11 @@ class Counter extends Phaser.Scene {
     super({ key: 'Counter' });
   }
 
+  init(data) {
+    this.difficulty = data.difficulty;
+    this.timer = data.timer;
+  }
+
   create() {
     //Start Counter sound
     const counterSound = this.sound.add('counter').setVolume(0.5);
@@ -21,7 +26,11 @@ class Counter extends Phaser.Scene {
       callback: () => {
         counterTime -= 1;
         counter.setText(counterTime);
-        if (counterTime == 0) this.scene.start('Judgment');
+        if (counterTime == 0)
+          this.scene.start('Judgment', {
+            difficulty: this.difficulty,
+            timer: this.timer,
+          });
       },
       callbackScope: this,
       loop: true,

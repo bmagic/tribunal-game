@@ -43,6 +43,7 @@ class Loading extends Phaser.Scene {
     this.load.image('moyen', 'assets/images/moyen.png');
     this.load.image('bureaulogue', 'assets/images/bureaulogue.png');
     this.load.image('combo', 'assets/images/combo.png');
+    this.load.image('ackboo', 'assets/images/ackboo.jpg');
 
     //Load musics
     this.load.audio('music', 'assets/sounds/bureaulogie.mp3');
@@ -52,6 +53,8 @@ class Loading extends Phaser.Scene {
     this.load.audio('wrong', 'assets/sounds/wrong.mp3');
     this.load.audio('button', 'assets/sounds/button.wav');
     this.load.audio('law', 'assets/sounds/law.mp3');
+    this.load.audio('challenger', 'assets/sounds/challenger.mp3');
+    this.load.audio('countdown', 'assets/sounds/countdown.mp3');
 
     //Load desktops json and images
     this.load.json('desktops', 'assets/desktops/desktops.json');
@@ -70,6 +73,9 @@ class Loading extends Phaser.Scene {
   create() {
     //Keep music playing without focus
     this.sound.pauseOnBlur = false;
+
+    //Initialize theme sound
+    globalThis.theme = this.sound.add('theme').setVolume(0.2).setLoop(true);
 
     //Destroy Loading container
     this.loadingContainer.destroy();

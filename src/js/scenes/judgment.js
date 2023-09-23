@@ -1,9 +1,16 @@
-class Judgement extends Phaser.Scene {
+class Judgment extends Phaser.Scene {
   constructor() {
     super({ key: 'Judgment' });
   }
 
+  init(data) {
+    this.boss = data.boss || false;
+    this.difficulty = data.difficulty;
+    this.timer = data.timer || 5;
+  }
+
   create() {
+    console.log(this.difficulty);
     this.score = 0;
     this.bonus = 0;
     this.currentDestkopIndex = 0;
@@ -11,9 +18,10 @@ class Judgement extends Phaser.Scene {
     //Load desktop from cache
     this.shuffledDesktops = this.cache.json.get('desktops');
     //this.shuffledDesktops = this.shuffledDesktops.slice(0, 50);
-    this.shuffledDesktops = this.shuffledDesktops.sort(
-      (a, b) => 0.5 - Math.random()
-    );
+    this.shuffledDesktops = this.shuffledDesktops
+      .map((a) => ({ sort: Math.random(), value: a }))
+      .sort((a, b) => a.sort - b.sort)
+      .map((a) => a.value);
 
     //Add cartouche top right
     this.scoreText = this.add.text(20, 20, generateScoreText(this.score));
@@ -26,13 +34,46 @@ class Judgement extends Phaser.Scene {
       .container(32, 32)
       .setDepth(999)
       .add([this.cartouche, this.scoreText, this.bonusText]);
+    if (this.boss) {
+      this.scoreText.setAlpha(0);
+      this.bonusText.setAlpha(0);
+      this.cartouche.setAlpha(0);
+    }
+
+    //Add Time Text
+    this.currentTime = this.timer;
+    this.timeText = this.add
+      .text(1180, 20, this.currentTime, {
+        font: '80px Arial',
+        fill: '#E82219',
+      })
+      .setDepth(999);
+
+    //Launch timer
+    this.countdown = this.time.addEvent({
+      delay: 1000,
+      callback: () => {
+        this.currentTime -= 1; // One second
+        this.timeText.setText(this.currentTime);
+        if (this.currentTime == 0) {
+          this.currentTime = this.timer;
+          this.resolveJudgment('perdu');
+        }
+      },
+      callbackScope: this,
+      loop: true,
+    });
 
     //Add desktop reference bottom left
     this.ref = this.add
       .text(
         20,
         700,
-        generateDesktopRefText(this.shuffledDesktops, this.currentDestkopIndex)
+        generateDesktopRefText(
+          this.shuffledDesktops,
+          this.currentDestkopIndex,
+          this.boss
+        )
       )
       .setDepth(999);
 
@@ -57,7 +98,11 @@ class Judgement extends Phaser.Scene {
       .image(
         0,
         0,
-        generateDesktopId(this.shuffledDesktops, this.currentDestkopIndex)
+        generateDesktopId(
+          this.shuffledDesktops,
+          this.currentDestkopIndex,
+          this.boss
+        )
       )
       .setOrigin(0)
       .setScale(0.67);
@@ -82,6 +127,15 @@ class Judgement extends Phaser.Scene {
     this.input.keyboard.on('keydown-ESC', () => {
       globalThis.theme.stop();
       this.scene.start('Menu');
+    });
+
+    // Mute key
+    this.input.keyboard.on('keyup-M', () => {
+      if (globalThis.theme.volume > 0) {
+        globalThis.theme.setVolume(0);
+      } else {
+        globalThis.theme.setVolume(0.2);
+      }
     });
   }
 
@@ -118,6 +172,36 @@ class Judgement extends Phaser.Scene {
     });
   }
   resolveJudgment(judgment) {
+    console.log(judgment);
+    //Reset the timer
+    this.currentTime = this.timer;
+    this.timeText.setText(this.currentTime);
+    this.countdown.timescale = this.timer;
+
+    //On boss judgment we redirect to win scene
+    if (this.boss) {
+      globalThis.bossCountdown.stop();
+      if (judgment == 'relaxe') {
+        this.sound.add('correct').play();
+        this.scene.start('End', { win: true });
+      } else {
+        this.sound.add('wrong').play();
+        this.scene.start('End', { win: false });
+      }
+      return;
+    }
+
+    //Send event for logs
+    const div = document.getElementById('logs');
+    div.dispatchEvent(
+      new CustomEvent('add', {
+        detail: {
+          desktop: this.shuffledDesktops[this.currentDestkopIndex],
+          judgment: judgment,
+        },
+      })
+    );
+
     if (this.shuffledDesktops[this.currentDestkopIndex].jugement == judgment) {
       //Play correct sound
       this.sound.add('correct').play();
@@ -134,9 +218,10 @@ class Judgement extends Phaser.Scene {
       this.bonus = this.bonus >= 5 ? 5 : this.bonus + 1;
     } else {
       //Calculate score based on difficulty
-      switch (globalThis.difficulty) {
+      switch (this.difficulty) {
         case 0:
           this.score = this.score > 5 ? this.score - 5 : 0;
+          break;
         case 1:
           this.score = this.score > 10 ? this.score - 10 : 0;
           break;
@@ -173,25 +258,26 @@ class Judgement extends Phaser.Scene {
     //Exit scene on max score
     if (this.score >= 99) {
       globalThis.theme.stop();
-      this.scene.start('End');
+      this.scene.start('BossIntro');
     }
   }
 }
-export default Judgement;
 
 const generateScoreText = (level) => `Bureaulogue lvl ${level}/99`;
 const generateBonusText = (bonus) => `Combo ${bonus}/5`;
-const generateDesktopRefText = (shuffledDesktops, currentDestkopIndex) =>
-  `s${shuffledDesktops[currentDestkopIndex].saison}/e${shuffledDesktops[currentDestkopIndex].emission}/b${shuffledDesktops[currentDestkopIndex].id}`;
-const generateDesktopId = (shuffledDesktops, currentDestkopIndex) =>
-  `s${shuffledDesktops[currentDestkopIndex].saison}-${shuffledDesktops[currentDestkopIndex].emission}-${shuffledDesktops[currentDestkopIndex].id}`;
-// this.time.addEvent({
-//     delay: 1000, callback: () => {
-//         initialTime -= 1; // One second
-//         timeText.setText(`Temps restant: ${initialTime}s`);
-//         if (initialTime == 0) {
-//             this.scene.start('Score', { score: score });
-//             theme.stop()
-//         }
-//     }, callbackScope: this, loop: true
-// });
+const generateDesktopRefText = (
+  shuffledDesktops,
+  currentDestkopIndex,
+  boss
+) => {
+  if (!boss)
+    return `s${shuffledDesktops[currentDestkopIndex].saison}/e${shuffledDesktops[currentDestkopIndex].emission}/b${shuffledDesktops[currentDestkopIndex].id}`;
+  else return `unpublish`;
+};
+const generateDesktopId = (shuffledDesktops, currentDestkopIndex, boss) => {
+  if (!boss)
+    return `s${shuffledDesktops[currentDestkopIndex].saison}-${shuffledDesktops[currentDestkopIndex].emission}-${shuffledDesktops[currentDestkopIndex].id}`;
+  else return `ackboo`;
+};
+
+export default Judgment;
