@@ -139,6 +139,15 @@ class Judgment extends Phaser.Scene {
         globalThis.theme.setVolume(0.2);
       }
     });
+
+    // Pause key
+    this.input.keyboard.on('keyup-P', () => {
+      this.scene.pause();
+      this.scene.launch('Pause');
+    });
+
+    this.events.on('pause', () => this.currentDestkopImage.setAlpha(0));
+    this.events.on('resume', () => this.currentDestkopImage.setAlpha(1));
   }
 
   startComboEvent() {

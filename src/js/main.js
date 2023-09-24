@@ -5,6 +5,7 @@ import Counter from './scenes/counter';
 import Judgment from './scenes/judgment';
 import End from './scenes/end';
 import BossIntro from './scenes/bossIntro';
+import Pause from './scenes/pause';
 
 import emissions from '../assets/desktops/emissions.json';
 
@@ -16,7 +17,7 @@ const config = {
   width: 1280,
   height: 720,
   backgroundColor: '#000000',
-  scene: [Loading, Menu, End, Judgment, Counter, BossIntro],
+  scene: [Loading, Menu, End, Judgment, Counter, BossIntro, Pause],
   scale: {
     parent: 'game',
     autoCenter: Phaser.Scale.CENTER_BOTH,

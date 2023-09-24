@@ -1,6 +1,6 @@
 {
   "name": "bureaulogie",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Bureaulogie Judge",
   "main": "src/js/main.js",
   "scripts": {
