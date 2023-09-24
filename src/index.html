@@ -2,6 +2,7 @@
 <html>
   <head>
     <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+    <link type="text/plain" rel="author" href="http://domain/humans.txt" />
     <title><%= htmlWebpackPlugin.options.title %></title>
     <style>
       a.wrong{
@@ -10,21 +11,38 @@
       a.correct{
         color: #00FF00;
       }
+      a{
+        color:#FFF;
+      }
       body{
         background-color: black;
+        color:#FFFFFF;
+        overflow-y: scroll;
+        margin:0 auto;
+      }
+      #game{
+        width:1280px;
+        margin:0 auto;
+      }
+      #game canvas{
+        box-shadow: 0 0 30px 15px #E82219;
+        padding-top:0;
       }
       #logs{
         width:1280px;
         text-align: center;
-        margin:0 auto;
+        margin: 30px auto;
       }
     </style>
   </head>
 
   <body>
-    <div style="position:absolute;bottom:0;right:0;">
+    <div style="position:fixed;bottom:0;left:0">
+    contact@bmagic.fr | Bmagic#6057</div>
+    <div style="position:fixed;bottom:0;right:0;">
+      <a href="humans.txt">credits</a>
       v<%= htmlWebpackPlugin.options.version %>
-    </div>
+      </div>
     <div id="game"></div>
     <div id="logs"></div>
   </body>

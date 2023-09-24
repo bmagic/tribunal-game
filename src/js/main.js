@@ -20,7 +20,6 @@ const config = {
   scene: [Loading, Menu, End, Judgment, Counter, BossIntro, Pause],
   scale: {
     parent: 'game',
-    autoCenter: Phaser.Scale.CENTER_BOTH,
   },
   fx: {
     glow: {
@@ -30,7 +29,6 @@ const config = {
   },
 };
 
-console.log(emissions);
 var div = document.getElementById('logs');
 div.addEventListener('add', (e) => {
   const judgment = e.detail.judgment;
@@ -56,6 +54,10 @@ div.addEventListener('add', (e) => {
     text = `<div><a class=wrong target="_blank" href="${url}">Vous n'avez pas répondu assez vite (Saison ${desktop.saison} Episode ${desktop.emission} Bureau ${desktop.id} - ${lvl})</a>`;
   }
   div.innerHTML = text + div.innerHTML;
+});
+
+div.addEventListener('reset', (e) => {
+  div.innerHTML = '';
 });
 
 const game = new Phaser.Game(config);

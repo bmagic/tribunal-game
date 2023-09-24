@@ -15,31 +15,25 @@ class Menu extends Phaser.Scene {
 
     //Display content on right part
     const content = [
-      'En 2139, MONTARGIS-CITY ONE a été ravagée par de terribles',
-      'bureaux. 100 millions de citoyens végètent dans les LEDs et la crasse.',
+      'En 2139, MONTARGIS-CITY ONE a été ravagée par de terribles bureaux. 100 millions de citoyens végètent dans les LEDs et la crasse.',
       '',
-      'Pour lutter contre la criminalité galopante, des milices bureaulogiques',
-      'ont été créées, les JUDGES - capables de juger et de gnouffer',
-      'instantanément.',
+      'Pour lutter contre la criminalité galopante, des milices bureaulogiques ont été créées, les JUDGES - capables de juger et de gnouffer instantanément.',
       '',
-      'Fort de son level 99 et de son LG G20 120 pouces, JUDGE ACKBOO',
-      "est le plus redouté d'entre eux.",
+      "Fort de son level 99 et de son LG G20 120 pouces, JUDGE ACKBOO est le plus redouté d'entre eux.",
       '',
-      'Mais le Système se retourne contre Lui quand il est accusé à tort,',
-      "d'un crime bureaulogique: des montres sur son bureau.",
+      "Mais le Système se retourne contre Lui quand il est accusé à tort,d'un crime bureaulogique: des montres sur son bureau.",
       '',
-      "Le responsable de cette machination n'est autre que l'infâme",
-      "DR DROUX, qui lui a volé son amour d'enfance.",
+      "Le responsable de cette machination n'est autre que l'infâme DR DROUX, qui lui a volé son amour d'enfance.",
+      '',
       'Une rivalité sans pitié les oppose et menace MONTARGIS-CITY ONE.',
       '',
       '',
-      'Pour sauver JUDGE ACKBOO et gnouffer DR DROUX, ta mission',
-      'est simple: atteins toi aussi le niveau 99 en jugeant les bureaux',
-      'de MONTARGIS-CITY ONE.',
+      'Pour sauver JUDGE ACKBOO et gnouffer DR DROUX, ta mission est simple: atteins toi aussi le niveau 99 en jugeant les bureaux de MONTARGIS-CITY ONE.',
     ];
     this.add.text(570, 40, content, {
       font: '22px Arial',
       fill: '#E82219',
+      wordWrap: { width: 690 },
     });
 
     //Add Menu

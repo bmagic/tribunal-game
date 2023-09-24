@@ -50,6 +50,10 @@ module.exports = {
     new CopyWebpackPlugin({
       patterns: [
         {
+          from: 'src/humans.txt',
+          to: '.',
+        },
+        {
           from: 'src/assets/',
           to: 'assets/',
         },
