@@ -37,10 +37,6 @@ class Counter extends Phaser.Scene {
       callbackScope: this,
       loop: true,
     });
-
-    //Reset logs
-    const div = document.getElementById('logs');
-    div.dispatchEvent(new CustomEvent('reset'));
   }
 }
 export default Counter;

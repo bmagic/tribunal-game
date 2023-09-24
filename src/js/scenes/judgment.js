@@ -14,6 +14,7 @@ class Judgment extends Phaser.Scene {
     this.score = 0;
     this.bonus = 0;
     this.currentDestkopIndex = 0;
+    globalThis.lastDesktop = undefined;
 
     //Load desktop from cache
     this.shuffledDesktops = this.cache.json.get('desktops');
@@ -40,6 +41,7 @@ class Judgment extends Phaser.Scene {
       this.scoreText.setAlpha(0);
       this.bonusText.setAlpha(0);
       this.cartouche.setAlpha(0);
+      this.lifeText.setAlpha(0);
     }
 
     //Add Time Text
@@ -142,8 +144,15 @@ class Judgment extends Phaser.Scene {
 
     // Pause key
     this.input.keyboard.on('keyup-P', () => {
-      this.scene.pause();
-      this.scene.launch('Pause');
+      if (!this.boss) {
+        this.scene.pause();
+        this.scene.launch('Pause');
+      }
+    });
+
+    // Fullscreen
+    this.input.keyboard.on('keyup-F', () => {
+      this.scale.toggleFullscreen();
     });
 
     this.events.on('pause', () => this.currentDestkopImage.setAlpha(0));
@@ -182,6 +191,7 @@ class Judgment extends Phaser.Scene {
       loop: false,
     });
   }
+
   resolveJudgment(judgment) {
     //Reset the timer
     this.currentTime = this.timer;
@@ -200,18 +210,10 @@ class Judgment extends Phaser.Scene {
       }
       return;
     }
-
-    //Send event for logs
-    const div = document.getElementById('logs');
-    div.dispatchEvent(
-      new CustomEvent('add', {
-        detail: {
-          desktop: this.shuffledDesktops[this.currentDestkopIndex],
-          judgment: judgment,
-          score: this.score,
-        },
-      })
-    );
+    //Set the lastDestkop item
+    globalThis.lastDesktop = this.shuffledDesktops[this.currentDestkopIndex];
+    globalThis.lastDesktop.success =
+      this.shuffledDesktops[this.currentDestkopIndex].jugement == judgment;
 
     if (this.shuffledDesktops[this.currentDestkopIndex].jugement == judgment) {
       //Play correct sound
@@ -286,7 +288,6 @@ const generateScoreText = (level) => `Bureaulogue lvl ${level}/99`;
 const generateBonusText = (bonus) => `Combo ${bonus}/5`;
 const generateLifeText = (life) => `Vies restantes ${life}`;
 
-generateLifeText;
 const generateDesktopRefText = (
   shuffledDesktops,
   currentDestkopIndex,

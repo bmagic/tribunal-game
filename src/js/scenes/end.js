@@ -35,6 +35,11 @@ class End extends Phaser.Scene {
       music.stop();
       this.scene.start('Menu');
     });
+
+    // Fullscreen
+    this.input.keyboard.on('keyup-F', () => {
+      this.scale.toggleFullscreen();
+    });
   }
 }
 export default End;

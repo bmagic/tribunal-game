@@ -85,7 +85,7 @@ class Loading extends Phaser.Scene {
       .text(
         this.cameras.main.width / 2,
         this.cameras.main.height / 2 - 200,
-        'Appuie sur une touche pour lancer le jeu',
+        'Appuie sur Entrer pour lancer le jeu',
         { font: '48px Arial', fill: '#FFFFFF' }
       )
       .setOrigin(0.5, 0.5);
@@ -93,15 +93,28 @@ class Loading extends Phaser.Scene {
       .text(
         this.cameras.main.width / 2,
         this.cameras.main.height / 2,
-        ['🠔 Non Relaxé', '🠖 Relaxé', 'M Mute', 'P Pause'],
+        [
+          '🠔 Non Relaxé',
+          '🠖 Relaxé',
+          'M Mute',
+          'P Pause & Lien vers le dernier jugement',
+          'F Plein écran',
+        ],
         {
           font: '30px Arial',
           fill: '#FFFFFF',
         }
       )
-      .setOrigin(0.5, 0.5);
-    this.input.keyboard.on('keyup', () => {
+      .setOrigin(0.5);
+
+    // Key Enter
+    this.input.keyboard.on('keyup-ENTER', () => {
       this.scene.start('Menu');
+    });
+
+    // Fullscreen
+    this.input.keyboard.on('keyup-F', () => {
+      this.scale.toggleFullscreen();
     });
   }
 }

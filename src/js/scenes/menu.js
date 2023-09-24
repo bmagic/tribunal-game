@@ -95,6 +95,11 @@ class Menu extends Phaser.Scene {
         globalThis.theme.setVolume(0.2);
       }
     });
+
+    // Fullscreen
+    this.input.keyboard.on('keyup-F', () => {
+      this.scale.toggleFullscreen();
+    });
   }
 }
 export default Menu;
