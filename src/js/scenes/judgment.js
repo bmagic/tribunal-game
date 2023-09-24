@@ -208,6 +208,7 @@ class Judgment extends Phaser.Scene {
         detail: {
           desktop: this.shuffledDesktops[this.currentDestkopIndex],
           judgment: judgment,
+          score: this.score,
         },
       })
     );

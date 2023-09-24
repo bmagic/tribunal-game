@@ -35,12 +35,15 @@ var div = document.getElementById('logs');
 div.addEventListener('add', (e) => {
   const judgment = e.detail.judgment;
   const desktop = e.detail.desktop;
+  const score = e.detail.score;
 
   const emission = emissions[`s${desktop.saison}e${desktop.emission}`];
   const url = `${emission.url}&t=${desktop.time}s`;
+  const lvl = `lvl ${score}`;
 
+  let text = '';
   if (judgment != 'perdu') {
-    div.innerHTML += `<div><a class="${
+    text = `<div><a class="${
       judgment == desktop.jugement ? 'correct' : 'wrong'
     }" target="_blank" href="${url}">${
       judgment == desktop.jugement ? 'Correct' : 'Faux'
@@ -48,10 +51,11 @@ div.addEventListener('add', (e) => {
       desktop.jugement == 'relaxe' ? 'a été relaxé' : "n'a pas été relaxé"
     } (Saison ${desktop.saison} Episode ${desktop.emission} Bureau ${
       desktop.id
-    })</a></div>`;
+    } - ${lvl})</a></div>`;
   } else {
-    div.innerHTML += `<div><a class=wrong target="_blank" href="${url}">Vous n'avez pas répondu assez vite</a>`;
+    text = `<div><a class=wrong target="_blank" href="${url}">Vous n'avez pas répondu assez vite (Saison ${desktop.saison} Episode ${desktop.emission} Bureau ${desktop.id} - ${lvl})</a>`;
   }
+  div.innerHTML = text + div.innerHTML;
 });
 
 const game = new Phaser.Game(config);

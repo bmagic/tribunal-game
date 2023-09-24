@@ -81,12 +81,25 @@ class Loading extends Phaser.Scene {
     this.loadingContainer.destroy();
 
     //Display text for helping user
-    this.add.text(
-      200,
-      this.cameras.main.height / 2 - 24,
-      'Appuie sur une touche pour lancer le jeu',
-      { font: '48px Arial', fill: '#FFFFFF' }
-    );
+    this.add
+      .text(
+        this.cameras.main.width / 2,
+        this.cameras.main.height / 2 - 200,
+        'Appuie sur une touche pour lancer le jeu',
+        { font: '48px Arial', fill: '#FFFFFF' }
+      )
+      .setOrigin(0.5, 0.5);
+    this.add
+      .text(
+        this.cameras.main.width / 2,
+        this.cameras.main.height / 2,
+        ['🠔 Non Relaxé', '🠖 Relaxé', 'M Mute', 'P Pause'],
+        {
+          font: '30px Arial',
+          fill: '#FFFFFF',
+        }
+      )
+      .setOrigin(0.5, 0.5);
     this.input.keyboard.on('keyup', () => {
       this.scene.start('Menu');
     });
