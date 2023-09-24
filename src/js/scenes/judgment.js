@@ -6,11 +6,11 @@ class Judgment extends Phaser.Scene {
   init(data) {
     this.boss = data.boss || false;
     this.difficulty = data.difficulty;
-    this.timer = data.timer || 5;
+    this.timer = data.timer || 10;
+    this.life = data.life || 10;
   }
 
   create() {
-    console.log(this.difficulty);
     this.score = 0;
     this.bonus = 0;
     this.currentDestkopIndex = 0;
@@ -24,8 +24,10 @@ class Judgment extends Phaser.Scene {
       .map((a) => a.value);
 
     //Add cartouche top right
-    this.scoreText = this.add.text(20, 20, generateScoreText(this.score));
-    this.bonusText = this.add.text(20, 55, generateBonusText(this.bonus));
+    this.scoreText = this.add.text(20, 15, generateScoreText(this.score));
+    this.bonusText = this.add.text(20, 40, generateBonusText(this.bonus));
+    this.lifeText = this.add.text(20, 65, generateLifeText(this.life));
+
     this.cartouche = this.add
       .image(0, 0, 'cartouche')
       .setOrigin(0)
@@ -33,7 +35,7 @@ class Judgment extends Phaser.Scene {
     this.add
       .container(32, 32)
       .setDepth(999)
-      .add([this.cartouche, this.scoreText, this.bonusText]);
+      .add([this.cartouche, this.scoreText, this.bonusText, this.lifeText]);
     if (this.boss) {
       this.scoreText.setAlpha(0);
       this.bonusText.setAlpha(0);
@@ -172,7 +174,6 @@ class Judgment extends Phaser.Scene {
     });
   }
   resolveJudgment(judgment) {
-    console.log(judgment);
     //Reset the timer
     this.currentTime = this.timer;
     this.timeText.setText(this.currentTime);
@@ -226,7 +227,7 @@ class Judgment extends Phaser.Scene {
           this.score = this.score > 10 ? this.score - 10 : 0;
           break;
         default:
-          this.score = 0;
+          this.score = this.score > 20 ? this.score - 20 : 0;
       }
 
       //Shake the camera
@@ -237,6 +238,14 @@ class Judgment extends Phaser.Scene {
 
       //Reset bonus
       this.bonus = 0;
+
+      //Calculate life
+      this.life--;
+      this.lifeText.setText(generateLifeText(this.life));
+      if (this.life == 0) {
+        globalThis.theme.stop();
+        this.scene.start('End', { win: false });
+      }
     }
 
     //Go to next desktop update elements
@@ -265,6 +274,9 @@ class Judgment extends Phaser.Scene {
 
 const generateScoreText = (level) => `Bureaulogue lvl ${level}/99`;
 const generateBonusText = (bonus) => `Combo ${bonus}/5`;
+const generateLifeText = (life) => `Vies restantes ${life}`;
+
+generateLifeText;
 const generateDesktopRefText = (
   shuffledDesktops,
   currentDestkopIndex,

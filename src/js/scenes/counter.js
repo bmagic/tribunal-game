@@ -6,6 +6,7 @@ class Counter extends Phaser.Scene {
   init(data) {
     this.difficulty = data.difficulty;
     this.timer = data.timer;
+    this.life = data.life;
   }
 
   create() {
@@ -30,6 +31,7 @@ class Counter extends Phaser.Scene {
           this.scene.start('Judgment', {
             difficulty: this.difficulty,
             timer: this.timer,
+            life: this.life,
           });
       },
       callbackScope: this,

@@ -72,17 +72,25 @@ class Menu extends Phaser.Scene {
     this.input.keyboard.on('keyup-ENTER', (event) => {
       // Define the timer with the difficulty
       let timer;
+      let life;
       switch (difficulty) {
         case 0:
           timer = 20;
+          life = 20;
           break;
         case 1:
           timer = 10;
+          life = 10;
           break;
         default:
           timer = 5;
+          life = 5;
       }
-      this.scene.start('Counter', { difficulty: difficulty, timer: timer });
+      this.scene.start('Counter', {
+        difficulty: difficulty,
+        timer: timer,
+        life: life,
+      });
     });
 
     // Mute key
