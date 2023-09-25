@@ -59,7 +59,7 @@ class Loading extends Phaser.Scene {
     //Load desktops json and images
     this.load.json('desktops', 'assets/desktops/desktops.json');
     this.load.on('filecomplete-json-desktops', (key, type, data) => {
-      //data = data.slice(0, 50);
+      data = data.slice(0, 50);
       for (const idx in data) {
         const desktop = data[idx];
         this.load.image(
@@ -94,11 +94,11 @@ class Loading extends Phaser.Scene {
         this.cameras.main.width / 2,
         this.cameras.main.height / 2,
         [
-          '🠔 Non Relaxé',
-          '🠖 Relaxé',
-          'M Mute',
-          'P Pause & Lien vers le dernier jugement',
-          'F Plein écran',
+          '🠔: Bureau Non Relaxé',
+          '🠖: Bureau Relaxé',
+          'M: Mute de la musique',
+          'P: Pause & lien vidéo jugement',
+          'F: Plein écran',
         ],
         {
           font: '30px Arial',

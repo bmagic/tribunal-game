@@ -18,7 +18,7 @@ class Judgment extends Phaser.Scene {
 
     //Load desktop from cache
     this.shuffledDesktops = this.cache.json.get('desktops');
-    //this.shuffledDesktops = this.shuffledDesktops.slice(0, 50);
+    this.shuffledDesktops = this.shuffledDesktops.slice(0, 50);
     this.shuffledDesktops = this.shuffledDesktops
       .map((a) => ({ sort: Math.random(), value: a }))
       .sort((a, b) => a.sort - b.sort)

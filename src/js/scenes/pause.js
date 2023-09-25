@@ -44,9 +44,19 @@ class Pause extends Phaser.Scene {
           }
         )
         .setOrigin(0.5)
-        .setInteractive();
+        .setInteractive({ useHandCursor: true });
 
       link.on('pointerup', () => this.openExternalLink(url), this);
+      link.on('pointerover', () =>
+        link.setStyle({
+          fill: globalThis.lastDesktop.success ? '#00FFFF' : '#FFFF00',
+        })
+      );
+      link.on('pointerout', () =>
+        link.setStyle({
+          fill: globalThis.lastDesktop.success ? '#00FF00' : '#FF0000',
+        })
+      );
     }
 
     //Resume Judgment

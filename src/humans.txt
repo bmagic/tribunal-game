@@ -1,18 +1,18 @@
                             
 /* TEAM */                      
-Conception et dévelopage: Bmagic
+Conception et dev: Bmagic
 Github: https://github.com/bmagic/tribunal-game
 Email: contact@bmagic.fr
 			
 /* THANKS */
-Mr Droux pour les textes, le testing et les idées.
-Sandra, Louison & Morgane pour les idées et le testing.
+Mr Droux pour les textes, le testing et les idees.
+Mes 3 amoours pour les idées et le testing.
 ackboo sans qui rien de cela ne serait possible.
-Les viewers jugés dans le tribunal des bureaux sans qui cela sera encore moins possible.
+Les viewers jugés dans le tribunal des bureaux sans qui cela serait encore moins possible.
 
 /* SITE */                   
 Components: Phaser3 Game Framework
 
 /* CREDITS */
 Music: Stranger Things by Music_Unlimited
-Sound: Pixabay
+Sounds: Pixabay
