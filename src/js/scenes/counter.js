@@ -10,33 +10,50 @@ class Counter extends Phaser.Scene {
   }
 
   create() {
-    //Start Counter sound
-    const counterSound = this.sound.add('counter').setVolume(0.5);
-    counterSound.play();
-
-    //Create a counter text
-    let counterTime = 3;
-    const counter = this.add.text(
-      this.cameras.main.width / 2 - 90,
-      this.cameras.main.height / 2 - 100,
-      counterTime,
-      { font: '200px Arial', fill: '#FFFFFF' }
-    );
-    this.time.addEvent({
-      delay: 1000,
-      callback: () => {
-        counterTime -= 1;
-        counter.setText(counterTime);
-        if (counterTime == 0)
+    //Start Counter
+    const counter = this.add
+      .text(
+        this.cameras.main.width / 2 - 90,
+        this.cameras.main.height / 2 - 100,
+        3,
+        { font: '200px Arial', fill: '#FFFFFF' }
+      )
+      .setAlpha(0);
+    const timeline = this.add.timeline([
+      {
+        at: 200,
+        run: () => {
+          counter.setAlpha(1);
+        },
+        sound: '3',
+      },
+      {
+        at: 1200,
+        run: () => {
+          counter.setText(2);
+        },
+        sound: '2',
+      },
+      {
+        at: 2200,
+        run: () => {
+          counter.setText(1);
+        },
+        sound: '1',
+      },
+      {
+        at: 3200,
+        run: () => {
           this.scene.start('Judgment', {
             difficulty: this.difficulty,
             timer: this.timer,
             life: this.life,
           });
+        },
+        sound: 'fight',
       },
-      callbackScope: this,
-      loop: true,
-    });
+    ]);
+    timeline.play();
   }
 }
 export default Counter;

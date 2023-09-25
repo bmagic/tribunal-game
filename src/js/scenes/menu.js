@@ -11,7 +11,7 @@ class Menu extends Phaser.Scene {
     globalThis.theme.play();
 
     //Display the image on left part
-    this.add.image(0, 0, 'affiche').setOrigin(0).setScale(0.6);
+    this.add.image(0, 0, 'affiche').setOrigin(0).setScale(0.9);
 
     //Display content on right part
     const content = [
@@ -30,22 +30,25 @@ class Menu extends Phaser.Scene {
       '',
       'Pour sauver JUDGE ACKBOO et gnouffer DR DROUX, ta mission est simple: atteins toi aussi le niveau 99 en jugeant les bureaux de MONTARGIS-CITY ONE.',
     ];
-    this.add.text(570, 40, content, {
-      font: '22px Arial',
+    this.add.text(this.cameras.main.width / 2 - 100, 40, content, {
+      font: '30px Arial',
       fill: '#E82219',
-      wordWrap: { width: 690 },
+      wordWrap: { width: 1000 },
     });
 
     //Add Menu
     const facile = this.add
-      .image(550, 590, 'facile')
+      .image(this.cameras.main.width / 2 - 100, 900, 'facile')
       .setOrigin(0)
-      .setScale(0.4);
-    const moyen = this.add.image(730, 590, 'moyen').setOrigin(0).setScale(0.4);
+      .setScale(0.5);
+    const moyen = this.add
+      .image(this.cameras.main.width / 2 + 180, 900, 'moyen')
+      .setOrigin(0)
+      .setScale(0.5);
     const bureaulogue = this.add
-      .image(915, 582, 'bureaulogue')
+      .image(this.cameras.main.width / 2 + 450, 892, 'bureaulogue')
       .setOrigin(0)
-      .setScale(0.45);
+      .setScale(0.55);
     let button = [facile, moyen, bureaulogue];
     let glow = button[difficulty].preFX.addGlow(0xe82219, 2);
 

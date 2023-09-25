@@ -16,9 +16,13 @@ class Judgment extends Phaser.Scene {
     this.currentDestkopIndex = 0;
     globalThis.lastDesktop = undefined;
 
+    //On boss scene play countdown
+    if (this.boss) {
+      this.countdownSound();
+    }
     //Load desktop from cache
     this.shuffledDesktops = this.cache.json.get('desktops');
-    this.shuffledDesktops = this.shuffledDesktops.slice(0, 50);
+    //this.shuffledDesktops = this.shuffledDesktops.slice(0, 50);
     this.shuffledDesktops = this.shuffledDesktops
       .map((a) => ({ sort: Math.random(), value: a }))
       .sort((a, b) => a.sort - b.sort)
@@ -47,7 +51,7 @@ class Judgment extends Phaser.Scene {
     //Add Time Text
     this.currentTime = this.timer;
     this.timeText = this.add
-      .text(1180, 20, this.currentTime, {
+      .text(this.cameras.main.width - 100, 40, this.currentTime, {
         font: '80px Arial',
         fill: '#E82219',
       })
@@ -71,8 +75,8 @@ class Judgment extends Phaser.Scene {
     //Add desktop reference bottom left
     this.ref = this.add
       .text(
+        this.cameras.main.width - 120,
         20,
-        700,
         generateDesktopRefText(
           this.shuffledDesktops,
           this.currentDestkopIndex,
@@ -83,15 +87,23 @@ class Judgment extends Phaser.Scene {
 
     //Load buttons with fx
     this.leftButton = this.add
-      .image(520, 620, 'left')
+      .image(
+        this.cameras.main.width / 2 - 100,
+        this.cameras.main.height - 150,
+        'left'
+      )
       .setOrigin(0)
       .setDepth(999)
-      .setScale(0.8);
+      .setScale(1);
     this.rightButton = this.add
-      .image(660, 620, 'right')
+      .image(
+        this.cameras.main.width / 2 + 100,
+        this.cameras.main.height - 150,
+        'right'
+      )
       .setOrigin(0)
       .setDepth(999)
-      .setScale(0.8);
+      .setScale(1);
     this.fxLeftButton = this.leftButton.preFX.addColorMatrix();
     this.fxRightButton = this.rightButton.preFX.addColorMatrix();
     this.leftButton.postFX.addShine(1, 0.2, 5);
@@ -109,7 +121,7 @@ class Judgment extends Phaser.Scene {
         )
       )
       .setOrigin(0)
-      .setScale(0.67);
+      .setScale(1);
 
     // Left button pressed
     this.input.keyboard.on('keydown-LEFT', () => {
@@ -165,10 +177,10 @@ class Judgment extends Phaser.Scene {
       delay: 100,
       callback: () => {
         this.combo = this.add
-          .image(300, -10, 'combo')
-          .setOrigin(0)
-          .setDepth(999)
-          .setScale(0.9);
+          .image(this.cameras.main.width / 2, 70, 'combo')
+          .setOrigin(0.5)
+          .setDepth(999);
+
         const barrel = this.combo.preFX.addBarrel(1);
         this.add.tween({
           duration: 500,
@@ -200,7 +212,7 @@ class Judgment extends Phaser.Scene {
 
     //On boss judgment we redirect to win scene
     if (this.boss) {
-      globalThis.bossCountdown.stop();
+      this.countdownTimeline.stop();
       if (judgment == 'relaxe') {
         this.sound.add('correct').play();
         this.scene.start('End', { win: true });
@@ -281,6 +293,32 @@ class Judgment extends Phaser.Scene {
       globalThis.theme.stop();
       this.scene.start('BossIntro');
     }
+  }
+  countdownSound() {
+    this.countdownTimeline = this.add
+      .timeline([
+        {
+          at: 0,
+          sound: '5',
+        },
+        {
+          at: 1000,
+          sound: '4',
+        },
+        {
+          at: 2000,
+          sound: '3',
+        },
+        {
+          at: 3000,
+          sound: '2',
+        },
+        {
+          at: 4000,
+          sound: '1',
+        },
+      ])
+      .play();
   }
 }
 

@@ -5,12 +5,17 @@ class BossIntro extends Phaser.Scene {
 
   create() {
     this.challenger = this.add
-      .text(50, 250, ['New Challenger'], {
-        font: '55px Arial',
-        fill: '#FF0000',
-      })
+      .text(
+        this.cameras.main.width / 2,
+        this.cameras.main.height / 2,
+        ['New Challenger'],
+        {
+          font: '55px Arial',
+          fill: '#FF0000',
+        }
+      )
       .setAlpha(0)
-      .setOrigin(0);
+      .setOrigin(0.5);
     const timeline = this.add.timeline([
       {
         at: 0,
@@ -30,10 +35,6 @@ class BossIntro extends Phaser.Scene {
       {
         at: 4000,
         run: () => {
-          //Start final countdown
-          globalThis.bossCountdown = this.sound.add('countdown');
-          globalThis.bossCountdown.play();
-
           //Launch judgment scene with boss
           this.scene.start('Judgment', { boss: true, timer: 5 });
         },

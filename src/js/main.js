@@ -17,8 +17,8 @@ const config = {
   scene: [Loading, Menu, End, Judgment, Counter, BossIntro, Pause],
   scale: {
     parent: 'game',
-    width: 1280,
-    height: 720,
+    width: 1920,
+    height: 1080,
     autoCenter: Phaser.Scale.CENTER_HORIZONTALLY,
     mode: Phaser.Scale.FIT,
   },

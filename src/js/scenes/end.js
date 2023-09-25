@@ -7,9 +7,10 @@ class End extends Phaser.Scene {
     this.win = data.win || false;
   }
   create() {
-    const music = this.sound.add('music').setLoop(true);
-    music.play();
+    let music;
+
     if (this.win) {
+      music = this.sound.add('music').setLoop(true);
       const info = this.add.text(
         10,
         10,
@@ -19,7 +20,22 @@ class End extends Phaser.Scene {
           fill: '#FFFFFF',
         }
       );
+      this.add
+        .timeline([
+          {
+            at: 300,
+            sound: 'win',
+          },
+          {
+            at: 1400,
+            run: () => {
+              music.play();
+            },
+          },
+        ])
+        .play();
     } else {
+      music = this.sound.add('sad').setLoop(true).setVolume(0.2);
       const info = this.add.text(
         10,
         10,
@@ -29,6 +45,24 @@ class End extends Phaser.Scene {
           fill: '#FFFFFF',
         }
       );
+      this.add
+        .timeline([
+          {
+            at: 300,
+            sound: 'loose',
+          },
+          {
+            at: 1400,
+            sound: 'laugh',
+          },
+          {
+            at: 3600,
+            run: () => {
+              music.play();
+            },
+          },
+        ])
+        .play();
     }
 
     this.input.keyboard.on('keyup-ENTER', () => {

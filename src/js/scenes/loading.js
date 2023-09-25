@@ -47,19 +47,27 @@ class Loading extends Phaser.Scene {
 
     //Load musics
     this.load.audio('music', 'assets/sounds/bureaulogie.mp3');
-    this.load.audio('counter', 'assets/sounds/counter.mp3');
     this.load.audio('theme', 'assets/sounds/theme.mp3');
     this.load.audio('correct', 'assets/sounds/correct.wav');
     this.load.audio('wrong', 'assets/sounds/wrong.mp3');
     this.load.audio('button', 'assets/sounds/button.wav');
     this.load.audio('law', 'assets/sounds/law.mp3');
     this.load.audio('challenger', 'assets/sounds/challenger.mp3');
-    this.load.audio('countdown', 'assets/sounds/countdown.mp3');
+    this.load.audio('loose', 'assets/sounds/loose.mp3');
+    this.load.audio('win', 'assets/sounds/win.mp3');
+    this.load.audio('laugh', 'assets/sounds/laugh.mp3');
+    this.load.audio('1', 'assets/sounds/1.mp3');
+    this.load.audio('2', 'assets/sounds/2.mp3');
+    this.load.audio('3', 'assets/sounds/3.mp3');
+    this.load.audio('4', 'assets/sounds/4.mp3');
+    this.load.audio('5', 'assets/sounds/5.mp3');
+    this.load.audio('fight', 'assets/sounds/fight.mp3');
+    this.load.audio('sad', 'assets/sounds/sad.mp3');
 
     //Load desktops json and images
     this.load.json('desktops', 'assets/desktops/desktops.json');
     this.load.on('filecomplete-json-desktops', (key, type, data) => {
-      data = data.slice(0, 50);
+      //data = data.slice(0, 50);
       for (const idx in data) {
         const desktop = data[idx];
         this.load.image(
@@ -75,7 +83,7 @@ class Loading extends Phaser.Scene {
     this.sound.pauseOnBlur = false;
 
     //Initialize theme sound
-    globalThis.theme = this.sound.add('theme').setVolume(0.2).setLoop(true);
+    globalThis.theme = this.sound.add('theme').setVolume(0.1).setLoop(true);
 
     //Destroy Loading container
     this.loadingContainer.destroy();
