@@ -2,6 +2,9 @@ class BossIntro extends Phaser.Scene {
   constructor() {
     super({ key: 'BossIntro' });
   }
+  init(data) {
+    this.difficulty = data.difficulty;
+  }
 
   create() {
     this.challenger = this.add
@@ -36,7 +39,11 @@ class BossIntro extends Phaser.Scene {
         at: 4000,
         run: () => {
           //Launch judgment scene with boss
-          this.scene.start('Judgment', { boss: true, timer: 5 });
+          this.scene.start('Judgment', {
+            boss: true,
+            timer: 5,
+            difficulty: this.difficulty,
+          });
         },
       },
     ]);

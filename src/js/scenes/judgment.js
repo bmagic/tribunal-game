@@ -215,7 +215,10 @@ class Judgment extends Phaser.Scene {
       this.countdownTimeline.stop();
       if (judgment == 'relaxe') {
         this.sound.add('correct').play();
-        this.scene.start('End', { win: true });
+        this.scene.start('End', {
+          win: true,
+          bureaulogue: this.difficulty == 2,
+        });
       } else {
         this.sound.add('wrong').play();
         this.scene.start('End', { win: false });
@@ -291,7 +294,7 @@ class Judgment extends Phaser.Scene {
     //Exit scene on max score
     if (this.score >= 99) {
       globalThis.theme.stop();
-      this.scene.start('BossIntro');
+      this.scene.start('BossIntro', { difficulty: this.difficulty });
     }
   }
   countdownSound() {

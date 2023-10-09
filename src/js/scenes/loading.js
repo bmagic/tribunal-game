@@ -44,6 +44,7 @@ class Loading extends Phaser.Scene {
     this.load.image('bureaulogue', 'assets/images/bureaulogue.png');
     this.load.image('combo', 'assets/images/combo.png');
     this.load.image('ackboo', 'assets/images/ackboo.jpg');
+    this.load.image('youtube', 'assets/images/youtube.png');
 
     //Load musics
     this.load.audio('music', 'assets/sounds/bureaulogie.mp3');
@@ -75,6 +76,20 @@ class Loading extends Phaser.Scene {
           `assets/desktops/s${desktop.saison}/${desktop.emission}-${desktop.id}.jpg`
         );
       }
+    });
+
+    // Load sprites
+    this.load.spritesheet('winend', 'assets/sprites/win.png', {
+      frameWidth: 512,
+      frameHeight: 512,
+    });
+    this.load.spritesheet('looseend', 'assets/sprites/loose.png', {
+      frameWidth: 512,
+      frameHeight: 512,
+    });
+    this.load.spritesheet('winendb', 'assets/sprites/winb.png', {
+      frameWidth: 512,
+      frameHeight: 512,
     });
   }
 

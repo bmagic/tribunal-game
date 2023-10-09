@@ -5,14 +5,17 @@ Github: https://github.com/bmagic/tribunal-game
 Email: contact@bmagic.fr
 			
 /* THANKS */
-Mr Droux pour les textes, le testing et les idees.
 Mes 3 amoours pour les idées et le testing.
+Mr Droux pour les textes, le testing et les idees.
 ackboo sans qui rien de cela ne serait possible.
 Les viewers jugés dans le tribunal des bureaux sans qui cela serait encore moins possible.
 
 /* SITE */                   
-Components: Phaser3 Game Framework
+Components: Phaser3 Game Framework (https://phaser.io)
+Sprites: made with Piskelapp (https://www.piskelapp.com)
 
 /* CREDITS */
-Music: Stranger Things by Music_Unlimited
 Sounds: Pixabay
+Theme Music: Stranger Things by Music_Unlimited on Pixabay
+Loose Music: Emotional Piano Sad Background Music For Videos by Lesfm on Pixabay
+Win Music: Je m'aime à mourir by acbkoo

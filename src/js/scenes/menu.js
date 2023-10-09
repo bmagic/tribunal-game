@@ -15,20 +15,20 @@ class Menu extends Phaser.Scene {
 
     //Display content on right part
     const content = [
-      'En 2139, MONTARGIS-CITY ONE a été ravagée par de terribles bureaux. 100 millions de citoyens végètent dans les LEDs et la crasse.',
+      'En 2139, Montargis-City-One a été ravagée par une invasion d’horribles bureaux. 100 millions de citoyens végètent dans les LEDs et la crasse.',
       '',
-      'Pour lutter contre la criminalité galopante, des milices bureaulogiques ont été créées, les JUDGES - capables de juger et de gnouffer instantanément.',
+      'Pour lutter contre la criminalité galopante, la Brigade Bureaulogique est créée. Pour faire respecter les lois, et restaurer la dignité humaine, les JUDGES, bureaulogues d’élite, sont capables de juger et de gnouffer dans l’instant.',
       '',
-      "Fort de son level 99 et de son LG G20 120 pouces, JUDGE ACKBOO est le plus redouté d'entre eux.",
+      "Le plus respecté d'entre eux est JUDGE ackboo. Implaccable, incorruptible, mélomane, level 99: le GNOUF c'est lui.",
       '',
-      "Mais le Système se retourne contre Lui quand il est accusé à tort,d'un crime bureaulogique: des montres sur son bureau.",
+      "Mais le Système se retourne contre lui quand il est accusé à tort, d'un crime bureaulogique: des montres sur son bureau.",
       '',
-      "Le responsable de cette machination n'est autre que l'infâme DR DROUX, qui lui a volé son amour d'enfance.",
+      "Le responsable de cette machination n'est autre que son ami d'enfance Mr. Droux, qui lui a volé son premier amour.",
       '',
-      'Une rivalité sans pitié les oppose et menace MONTARGIS-CITY ONE.',
+      'Une rivalité sans pitié les oppose et menace Montargis-City-One.',
       '',
       '',
-      'Pour sauver JUDGE ACKBOO et gnouffer DR DROUX, ta mission est simple: atteins toi aussi le niveau 99 en jugeant les bureaux de MONTARGIS-CITY ONE.',
+      'Pour sortir JUDGE ackboo de sa cellule, ta mission est simple: atteins le niveau 99 en jugeant les bureaux de Montargis-City-One.',
     ];
     this.add.text(this.cameras.main.width / 2 - 100, 40, content, {
       font: '30px Arial',

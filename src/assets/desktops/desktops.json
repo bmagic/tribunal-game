@@ -4239,5 +4239,98 @@
     "time": "5543",
     "jugement": "coupable",
     "sanction": "gnouf"
+  },
+  {
+    "id": 1,
+    "saison": 3,
+    "emission": 1,
+    "time": "589",
+    "jugement": "relaxe"
+  },
+  {
+    "id": 2,
+    "saison": 3,
+    "emission": 1,
+    "time": "2383",
+    "jugement": "coupable",
+    "sanction": "gnouf"
+  },
+  {
+    "id": 3,
+    "saison": 3,
+    "emission": 1,
+    "time": "3808",
+    "jugement": "coupable",
+    "sanction": "gnouf"
+  },
+  {
+    "id": 4,
+    "saison": 3,
+    "emission": 1,
+    "time": "5145",
+    "jugement": "coupable",
+    "sanction": "gnouf"
+  },
+  {
+    "id": 5,
+    "saison": 3,
+    "emission": 1,
+    "time": "5568",
+    "jugement": "coupable",
+    "sanction": "gnouf"
+  },
+  {
+    "id": 6,
+    "saison": 3,
+    "emission": 1,
+    "time": "7063",
+    "jugement": "coupable",
+    "sanction": "gnouf"
+  },
+  {
+    "id": 1,
+    "saison": 3,
+    "emission": 2,
+    "time": "595",
+    "jugement": "coupable",
+    "sanction": "gnouf"
+  },
+  {
+    "id": 2,
+    "saison": 3,
+    "emission": 2,
+    "time": "1269",
+    "jugement": "relaxe"
+  },
+  {
+    "id": 3,
+    "saison": 3,
+    "emission": 2,
+    "time": "2573",
+    "jugement": "relaxe"
+  },
+  {
+    "id": 4,
+    "saison": 3,
+    "emission": 2,
+    "time": "3902",
+    "jugement": "coupable",
+    "sanction": "gnouf"
+  },
+  {
+    "id": 5,
+    "saison": 3,
+    "emission": 2,
+    "time": "4720",
+    "jugement": "coupable",
+    "sanction": "gnouf"
+  },
+  {
+    "id": 7,
+    "saison": 3,
+    "emission": 2,
+    "time": "6611",
+    "jugement": "coupable",
+    "sanction": "gnouf"
   }
 ]
