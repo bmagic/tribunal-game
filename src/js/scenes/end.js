@@ -33,7 +33,7 @@ class End extends Phaser.Scene {
         info.setText([
           'Victoire !',
           '',
-          'Vous avez atteint le niveau Bureaulogue 99 : la JUSTICE a triomphée.',
+          'Vous avez atteint le niveau Bureaulogue 99 : la JUSTICE a triomphé.',
           '',
           'Montargis-City-One est en liesse : dans tous les quartiers de la ville, les habitants brûlent leurs bureaux immondes dans de grands feux de joie, en scandant votre nom.',
           'Les brasiers éclairent leurs visages baignés de larmes. Pour la première fois depuis des siècles, la flamme vacillante de la bureaulogie renaît...',
@@ -66,7 +66,7 @@ class End extends Phaser.Scene {
         info.setText([
           'Victoire !',
           '',
-          'Vous avez atteint le niveau 99 : la JUSTICE a triomphée.',
+          'Vous avez atteint le niveau 99 : la JUSTICE a triomphé.',
           '',
           'Montargis-City-One est en liesse : dans tous les quartiers de la ville, les habitants brûlent leurs bureaux immondes dans de grands feux de joie, en scandant votre nom.',
           'Les brasiers éclairent leurs visages baignés de larmes. Pour la première fois depuis des siècles, la flamme vacillante de la bureaulogie renaît...',
